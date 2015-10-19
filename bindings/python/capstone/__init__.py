@@ -230,7 +230,7 @@ if _found == False:
 
 # Attempt Darwin specific load (10.11 specific),
 # since LD_LIBRARY_PATH is not guaranteed to exist
-if system() == 'Darwin':
+if (_found == False) and (system() == 'Darwin'):
     _lib_path = '/usr/local/lib/'
     for _lib in _all_libs:
         try:
@@ -891,8 +891,7 @@ def debug():
 
     all_archs = ""
     keys = archs.keys()
-    keys.sort()
-    for k in keys:
+    for k in sorted(keys):
         if cs_support(archs[k]):
             all_archs += "-%s" % k
 
